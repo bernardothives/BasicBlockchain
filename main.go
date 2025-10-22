@@ -14,11 +14,11 @@ func main() {
 	}
 	bc.AddBlock("Enviando 1 BTC para o João")
 	bc.AddBlock("Enviando 2.5 BTC para a Maria")
-	fmt.Println("--- BLOCKCHAIN BÁSICO ---")
+	fmt.Println("----------- BLOCKCHAIN BÁSICO -----------")
 	for _, block := range bc.Blocks {
-		fmt.Println("Hash anterior: %x\n", block.PrevBlockHash)
-		fmt.Println("Dados: %s\n", block.Data)
-		fmt.Println("Hash Atual: %x\n", block.Hash)
+		fmt.Printf("Hash anterior: %x\n", block.PrevBlockHash)
+		fmt.Printf("Dados: %s\n", block.Data)
+		fmt.Printf("Hash Atual: %x\n", block.Hash)
 		fmt.Println("------------------------------------------")
 	}
 }
