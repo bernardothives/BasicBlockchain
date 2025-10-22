@@ -1,0 +1,19 @@
+# Binários compilados do Go
+# O nome pode variar dependendo do seu sistema operacional ou do comando `go build`
+BasicBlockchain
+BasicBlockchain.exe
+
+# Pasta do banco de dados BadgerDB
+# Contém os dados do blockchain e não deve ser versionada
+/badger/
+
+# Arquivos de log
+*.log
+
+# Pastas de configuração de IDEs comuns
+/.vscode/
+/.idea/
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
