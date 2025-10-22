@@ -1,3 +1,3 @@
-module github.com/bernardothives/BasicBlockchain.git
+module github.com/bernardothives/BasicBlockchain
 
 go 1.25.3
