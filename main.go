@@ -3,22 +3,39 @@ package main
 import (
 	"fmt"
 	"log"
+	"strconv"
 
 	"github.com/bernardothives/BasicBlockchain/blockchain"
 )
 
 func main() {
 	bc := blockchain.NewBlockchain()
-	if bc == nil {
-		log.Fatal("Falha ao criar o blockchain.")
-	}
-	bc.AddBlock("Enviando 1 BTC para o João")
-	bc.AddBlock("Enviando 2.5 BTC para a Maria")
-	fmt.Println("----------- BLOCKCHAIN BÁSICO -----------")
-	for _, block := range bc.Blocks {
-		fmt.Printf("Hash anterior: %x\n", block.PrevBlockHash)
+
+	defer func() {
+		if err := bc.Db.Close(); err != nil {
+			log.Panic(err)
+		}
+	}()
+
+	// bc.AddBlock("Enviando 1 BTC para o João")
+	// bc.AddBlock("Enviando 2.5 BTC para a Maria")
+
+	bci := bc.Iterator()
+
+	fmt.Println("----- IMPRIMINDO BLOCKCHAIN -----")
+	for {
+		block := bci.Next()
+
+		fmt.Printf("Hash Anterior: %x\n", block.PrevBlockHash)
 		fmt.Printf("Dados: %s\n", block.Data)
 		fmt.Printf("Hash Atual: %x\n", block.Hash)
-		fmt.Println("------------------------------------------")
+
+		pow := blockchain.NewProofOfWork(block)
+		fmt.Printf("PoW Válido: %s\n", strconv.FormatBool(pow.Validate()))
+		fmt.Println("------------------------------------")
+
+		if len(block.PrevBlockHash) == 0 {
+			break
+		}
 	}
 }
